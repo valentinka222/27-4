@@ -1,0 +1,36 @@
+# 4 - использование функций
+f = open('demo_2025_27_Б__520we.txt')
+s = f.readline()
+a = [[] for i in range(3)]
+for i in f:
+    s = i.replace(',', '.')
+    x, y = map(float, s.split())
+    # if y <= 3:
+    #     a[0].append([x, y])
+    # elif 11/3*x - 11 > y: # уравнение прямой находим по точкам
+    #     a[1].append([x, y])
+    # else:
+    #     a[2].append([x, y])
+    
+    # if (x-1)**2 + (y-1)**2 < 4: # можно также использовать окружности, запихнув кластеры в них
+    #     a[0].append([x, y])     # и сказать, что ур-е окружности меньше радиуса
+    # elif (x-7)**2 + (y-6)**2 < 4:
+    #     a[1].append([x, y])
+    # elif (x-3)**2 + (y-9)**2 < 4:
+    #     a[2].append([x, y])
+
+sx=sy=0
+for one in range(3):
+    mn = 1000000000000050000000000
+    for two in range(len(a[one])):
+        ls = 0
+        x1, y1 = a[one][two]
+        for tre in range(len(a[one])):
+            x2, y2 = a[one][tre]
+            ls += ((x2-x1)**2 + (y2-y1)**2)**0.5
+        if ls < mn:
+            mn = ls
+            x, y = x1, y1
+    sx += x
+    sy += y
+print(int((sx/3)*10000), int((sy/3)*10000))
